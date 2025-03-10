@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseñas de Productos</title>
+    <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>MOONSI</h1>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="categorias.html">Categorías</a></li>
+                <li><a href="#reseñas">Reseñas</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="reseñas">
+            <h2>Reseñas de Nuestros Clientes</h2>
+            <form id="formulario-reseña">
+                <label for="nombre">Nombre del producto:</label>
+                <input type="text" id="nombre" required>
+                
+                <label for="comentario">Comentario:</label>
+                <textarea id="comentario" required></textarea>
+                
+                <label for="calificacion">Calificación:</label>
+                <select id="calificacion">
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="1">⭐</option>
+                </select>
+                
+                <button type="submit">Enviar Reseña</button>
+            </form>
+            
+            <section id="lista-reseñas">
+                <h3>Opiniones Recientes</h3>
+                <ul id="reseñas-container">
+                    <!-- Las reseñas se agregarán aquí dinámicamente -->
+                </ul>
+            </section>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 MOONSI. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        document.getElementById("formulario-reseña").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let nombre = document.getElementById("nombre").value;
+            let comentario = document.getElementById("comentario").value;
+            let calificacion = document.getElementById("calificacion").value;
+            
+            let nuevaReseña = document.createElement("li");
+            nuevaReseña.innerHTML = `<strong>${nombre}</strong>: ${comentario} - ${'⭐'.repeat(calificacion)}`;
+            
+            document.getElementById("reseñas-container").appendChild(nuevaReseña);
+            
+            document.getElementById("formulario-reseña").reset();
+        });
+    </script>
+</body>
+</html>
