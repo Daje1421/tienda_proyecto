@@ -1,128 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Joyería</title>
-    <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-    <header>
-        <nav>
-            <h1>MOONSI</h1>
-            <ul>
-                <li><a href="#collares">Collares</a></li>
-                <li><a href="#pulseras">Pulseras</a></li>
-                <li><a href="#anillos">Anillos</a></li>
-                <li><a href="#aretes">Aretes</a></li>
-                <li><a href="reseñas.html" class="btn-reseñas">Agregar Reseña</a></li> <!-- Opción añadida -->
-                <li><a href="wishlist.html" class="btn-wishlist">Wishlist</a></li>
-            </ul>
-            <input type="search" placeholder="Buscar...">
-        </nav>
-    </header>
-    
-    <main>
-        <section id="filtros">
-            <h2>Filtrar por:</h2>
-            <label for="categoria">Categoría:</label>
-            <select id="categoria" onchange="filtrarProductos()">
-                <option value="todos">Todos</option>
-                <option value="collares">Collares</option>
-                <option value="pulseras">Pulseras</option>
-                <option value="anillos">Anillos</option>
-                <option value="aretes">Aretes</option>
-            </select>
-            
-            <label for="material">Material:</label>
-            <select id="material" onchange="filtrarProductos()">
-                <option value="todos">Todos</option>
-                <option value="oro">Oro</option>
-                <option value="plata">Plata</option>
-                <option value="acero">Acero inoxidable</option>
-            </select>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Catálogo de Joyería</title>
+        <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+        <script>
 
-            <label for="precio">Precio máximo (₡):</label>
-            <input type="number" id="precio" oninput="filtrarProductos()" placeholder="Ingrese un precio">
-        </section>
-        
-        <section id="catalogo">
-            <article class="producto" data-categoria="collares" data-material="perlas" data-precio="15000">
-                <img src="https://i.pinimg.com/736x/3a/e3/c7/3ae3c70fbd78c56802f8bbd63ee65e3c.jpg" width="250" alt="Collar 1">
-                <p>Collar de perlas y piedras naturales</p>
-                <p>₡15,000</p>
-                <button>Comprar</button>
-                <button> agregar a wishlist</button>
-            </article>
-            
-            <article class="producto" data-categoria="collares" data-material="acero" data-precio="20000">
-                <img src="https://cdnimg.emmiol.com/E/202302/img_original-VDB0521AC-2823530129.jpg" width="250" alt="Collar 2">
-                <p>Collar azul con dije de estrella</p>
-                <p>₡20,000</p>
-                <button>Comprar</button>
-                <button> agregar a wishlist</button>
-            </article>
-            
-            <article class="producto" data-categoria="anillos" data-material="plata" data-precio="12500">
-                <img src="https://m.media-amazon.com/images/I/51pQ4NXtHoL.jpg" width="250" alt="Anillo 1">
-                <p>Anillo de plata con incrustaciones</p>
-                <p>₡12,500</p>
-                <button>Comprar</button>
-                <button> agregar a wishlist</button>
-            </article>
-            
-            <article class="producto" data-categoria="pulseras" data-material="oro" data-precio="18000">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe0FRPxqmsIaZwf0SK0wvxIj2VPRFjxU67eQ&s" width="250" alt="Pulsera 1">
-                <p>Pulsera de oro</p>
-                <p>₡18,000</p>
-                <button>Comprar</button>
-                <button> agregar a wishlist</button>
-            </article>
-            
-            <article class="producto" data-categoria="aretes" data-material="oro" data-precio="15000">
-                <img src="https://siman.vtexassets.com/arquivos/ids/6124170-800-800?v=638616837174670000&width=800&height=800&aspect=true" width="250" alt="Aretes">
-                <p>Aretes de oro</p>
-                <p>₡15,000</p>
-                <button>Comprar</button>
-                <button> agregar a wishlist</button>
-            </article>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 MOONSI. Todos los derechos reservados.</p>
-    </footer>
-    
-    <script>
-        function filtrarProductos() {
-            let categoriaSeleccionada = document.getElementById("categoria").value;
-            let materialSeleccionado = document.getElementById("material").value;
-            let precioMaximo = document.getElementById("precio").value;
-            let productos = document.querySelectorAll(".producto");
-            
-            productos.forEach(producto => {
-                let categoriaProducto = producto.getAttribute("data-categoria");
-                let materialProducto = producto.getAttribute("data-material");
-                let precioProducto = parseInt(producto.getAttribute("data-precio"));
-                
-                let mostrar = true;
-                
-                if (categoriaSeleccionada !== "todos" && categoriaProducto !== categoriaSeleccionada) {
-                    mostrar = false;
-                }
-                
-                if (materialSeleccionado !== "todos" && materialProducto !== materialSeleccionado) {
-                    mostrar = false;
-                }
-                
-                if (precioMaximo && precioProducto > parseInt(precioMaximo)) {
-                    mostrar = false;
-                }
-                
-                producto.style.display = mostrar ? "block" : "none";
-            });
-        }
-    </script>
+            function agregarAWishlist(producto) {
+                let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
-</body>
+                wishlist.push(producto);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                alert(`${producto.nombre} ha sido agregado a tu wishlist.`);
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <h1>MOONSI</h1>
+                <ul>
+                    <li><a href="#collares">Collares</a></li>
+                    <li><a href="#pulseras">Pulseras</a></li>
+                    <li><a href="#anillos">Anillos</a></li>
+                    <li><a href="#aretes">Aretes</a></li>
+                    <li><a href="reseñas.html" class="btn-reseñas">Agregar Reseña</a></li> <!-- Opción añadida -->
+                    <li><a href="wishlist.html" class="btn-wishlist">Wishlist</a></li>
+                </ul>
+                <input type="search" placeholder="Buscar...">
+            </nav>
+        </header>
+
+        <main>
+            <section id="filtros">
+                <h2>Filtrar por:</h2>
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" onchange="filtrarProductos()">
+                    <option value="todos">Todos</option>
+                    <option value="collares">Collares</option>
+                    <option value="pulseras">Pulseras</option>
+                    <option value="anillos">Anillos</option>
+                    <option value="aretes">Aretes</option>
+                </select>
+
+                <label for="material">Material:</label>
+                <select id="material" onchange="filtrarProductos()">
+                    <option value="todos">Todos</option>
+                    <option value="oro">Oro</option>
+                    <option value="plata">Plata</option>
+                    <option value="acero">Acero inoxidable</option>
+                </select>
+
+                <label for="precio">Precio máximo (₡):</label>
+                <input type="number" id="precio" oninput="filtrarProductos()" placeholder="Ingrese un precio">
+            </section>
+
+            <section id="catalogo">
+                <article class="producto" data-categoria="collares" data-material="perlas" data-precio="15000">
+                    <img src="https://i.pinimg.com/736x/3a/e3/c7/3ae3c70fbd78c56802f8bbd63ee65e3c.jpg" width="250" alt="Collar 1">
+                    <p>Collar de perlas y piedras naturales</p>
+                    <p>₡15,000</p>
+                    <button>Comprar</button>
+                    <button onclick="agregarAWishlist({id: 1, nombre: 'Collar de perlas y piedras naturales', precio: '₡15,000'})">Agregar a Wishlist</button>
+                </article>
+
+                <article class="producto" data-categoria="collares" data-material="acero" data-precio="20000">
+                    <img src="https://cdnimg.emmiol.com/E/202302/img_original-VDB0521AC-2823530129.jpg" width="250" alt="Collar 2">
+                    <p>Collar azul con dije de estrella</p>
+                    <p>₡20,000</p>
+                    <button>Comprar</button>
+                    <button onclick="agregarAWishlist({id: 2, nombre: 'Collar azul con dije de estrella', precio: '₡20,000'})">Agregar a Wishlist</button>
+                </article>
+
+                <article class="producto" data-categoria="anillos" data-material="plata" data-precio="12500">
+                    <img src="https://m.media-amazon.com/images/I/51pQ4NXtHoL.jpg" width="250" alt="Anillo 1">
+                    <p>Anillo de plata con incrustaciones</p>
+                    <p>₡12,500</p>
+                    <button>Comprar</button>
+                    <button onclick="agregarAWishlist({id: 3, nombre: 'Anillo de plata con incrustaciones', precio: '₡12,500'})">Agregar a Wishlist</button>
+                </article>
+
+                <article class="producto" data-categoria="pulseras" data-material="oro" data-precio="18000">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe0FRPxqmsIaZwf0SK0wvxIj2VPRFjxU67eQ&s" width="250" alt="Pulsera 1">
+                    <p>Pulsera de oro</p>
+                    <p>₡18,000</p>
+                    <button>Comprar</button>
+                    <button onclick="agregarAWishlist({id: 4, nombre: 'pulsera de oro', precio: '₡18,000'})">Agregar a Wishlist</button>
+                </article>
+
+                <article class="producto" data-categoria="aretes" data-material="oro" data-precio="15000">
+                    <img src="https://siman.vtexassets.com/arquivos/ids/6124170-800-800?v=638616837174670000&width=800&height=800&aspect=true" width="250" alt="Aretes">
+                    <p>Aretes de oro</p>
+                    <p>₡15,000</p>
+                    <button>Comprar</button>
+                    <button onclick="agregarAWishlist({id: 5, nombre: 'Aretes de Oro', precio: '₡15,000'})">Agregar a Wishlist</button>
+                </article>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 MOONSI. Todos los derechos reservados.</p>
+        </footer>
+
+        <script>
+            function filtrarProductos() {
+                let categoriaSeleccionada = document.getElementById("categoria").value;
+                let materialSeleccionado = document.getElementById("material").value;
+                let precioMaximo = document.getElementById("precio").value;
+                let productos = document.querySelectorAll(".producto");
+
+                productos.forEach(producto => {
+                    let categoriaProducto = producto.getAttribute("data-categoria");
+                    let materialProducto = producto.getAttribute("data-material");
+                    let precioProducto = parseInt(producto.getAttribute("data-precio"));
+
+                    let mostrar = true;
+
+                    if (categoriaSeleccionada !== "todos" && categoriaProducto !== categoriaSeleccionada) {
+                        mostrar = false;
+                    }
+
+                    if (materialSeleccionado !== "todos" && materialProducto !== materialSeleccionado) {
+                        mostrar = false;
+                    }
+
+                    if (precioMaximo && precioProducto > parseInt(precioMaximo)) {
+                        mostrar = false;
+                    }
+
+                    producto.style.display = mostrar ? "block" : "none";
+                });
+            }
+        </script>
+
+    </body>
 </html>
