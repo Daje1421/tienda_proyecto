@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Deseos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Deseos</h1>
+    
+    <h2>Productos Disponibles</h2>
+    <ul id="productos"></ul>
+
+    <h2>Lista de Deseos</h2>
+    <ul id="wishlist"></ul>
+
+    <script>
+        const productosElement = document.getElementById('productos');
+        const wishlistElement = document.getElementById('wishlist');
+        let wishlist = [];
+
+        // Simulación de productos disponibles (esto debería venir de tu backend)
+        const productosDisponibles = [
+            { id: 1, nombre: 'Producto 1', precio: 100 },
+            { id: 2, nombre: 'Producto 2', precio: 200 },
+            { id: 3, nombre: 'Producto 3', precio: 300 }
+        ];
+
+        // Función para cargar productos disponibles
+        function cargarProductos() {
+            productosDisponibles.forEach(producto => {
+                const li = document.createElement('li');
+                li.innerHTML = `${producto.nombre} - $${producto.precio} 
+                                <button onclick="agregarAWishlist(${producto.id})">Agregar a la lista de deseos</button>`;
+                productosElement.appendChild(li);
+            });
+        }
+
+        // Función para agregar un producto a la lista de deseos
+        function agregarAWishlist(id) {
+            const producto = productosDisponibles.find(p => p.id === id);
+            if (producto && !wishlist.includes(producto)) {
+                wishlist.push(producto);
+                mostrarWishlist();
+            }
+        }
+
+        // Función para mostrar la lista de deseos
+        function mostrarWishlist() {
+            wishlistElement.innerHTML = '';
+            wishlist.forEach(producto => {
+                const li = document.createElement('li');
+                li.innerHTML = `${producto.nombre} - $${producto.precio} 
+                                <button onclick="eliminarDeWishlist(${producto.id})">Eliminar</button>`;
+                wishlistElement.appendChild(li);
+            });
+        }
+
+        // Función para eliminar un producto de la lista de deseos
+        function eliminarDeWishlist(id) {
+            wishlist = wishlist.filter(producto => producto.id !== id);
+            mostrarWishlist();
+        }
+
+        // Cargar productos al inicio
+        cargarProductos();
+    </script>
+</body>
+</html>

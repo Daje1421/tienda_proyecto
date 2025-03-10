@@ -91,3 +91,28 @@ footer {
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 40px;
 }
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+}
+
+button {
+    margin-left: 10px;
+}
