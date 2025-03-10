@@ -4,8 +4,40 @@
     <head>
         <meta charset="UTF-8">
         <title>Wishlist</title>
-        <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/estilos.css"> <!-- Asegúrate de que este enlace apunte a tu archivo CSS -->
         <style>
+            /* Estilos adicionales para la wishlist */
+
+            #wishlist-container {
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .producto {
+                border-bottom: 1px solid #ddd;
+                padding: 10px 0;
+                display: flex; /* Usar flexbox para alinear imagen y texto */
+                align-items: center; /* Centrar verticalmente */
+            }
+            .producto img {
+                width: 250px; /* Ajusta el tamaño de la imagen a 250px */
+                height: auto;
+                margin-right: 20px; /* Espacio entre la imagen y el texto */
+            }
+            .producto h2 {
+                margin: 0;
+                font-size: 1.5em;
+            }
+            .producto p {
+                margin: 5px 0;
+            }
+            .precio {
+                font-weight: bold;
+                color: #e67e22; /* Color del precio */
+            }
             .eliminar {
                 color: red;
                 cursor: pointer;
@@ -19,7 +51,7 @@
             <nav>
                 <h1>MOONSI</h1>
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="inicio.html">Inicio</a></li>
                     <li><a href="categorias.html">Categorías</a></li>
                     <li><a href="reseñas.html">Reseñas</a></li>
                 </ul>
@@ -28,6 +60,9 @@
         <h1>Mi Wishlist</h1>
         <div id="wishlist-container"></div>
 
+        <footer>
+            <p>&copy; 2024 MOONSI. Todos los derechos reservados.</p>
+        </footer>
         <script>
             // Función para mostrar la wishlist
             function mostrarWishlist() {
@@ -42,10 +77,13 @@
                         const productoDiv = document.createElement('div');
                         productoDiv.classList.add('producto');
                         productoDiv.innerHTML = `
-                            <h2>${producto.nombre}</h2>
-                            <p>${producto.descripcion}</p>
-                            <p class="precio">Precio: $${producto.precio}</p>
-                            <span class="eliminar" onclick="eliminarProducto(${index})">Eliminar</span>
+                            <img src="${producto.imagen}" alt="${producto.nombre}">
+                            <div>
+                                <h2>${producto.nombre}</h2>
+                                <p>${producto.descripcion}</p>
+                                <p class="precio">Precio: ${producto.precio}</p>
+                                <span class="eliminar" onclick="eliminarProducto(${index})">Eliminar</span>
+                            </div>
                         `;
                         wishlistContainer.appendChild(productoDiv);
                     });
