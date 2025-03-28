@@ -134,6 +134,50 @@
                 });
             }
         </script>
+         
+        <!--Botón para abrir el chat -->
+    <button id="chat-toggle">💬</button>
+
+    <div id="chat-container">
+        <div id="chat-header">Chat en Vivo <span onclick="toggleChat()" style="cursor:pointer; float:right;">❌</span></div>
+        <div id="chat-body"></div>
+        <div id="chat-footer">
+            <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+            <button onclick="enviarMensaje()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            let chat = document.getElementById("chat-container");
+            chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+        }
+
+        document.getElementById("chat-toggle").addEventListener("click", toggleChat);
+
+        function enviarMensaje() {
+            let input = document.getElementById("chat-input");
+            let mensaje = input.value.trim();
+            if (mensaje !== "") {
+                let chatBody = document.getElementById("chat-body");
+                let nuevoMensaje = document.createElement("p");
+                nuevoMensaje.textContent = "Tú: " + mensaje;
+                chatBody.appendChild(nuevoMensaje);
+                chatBody.scrollTop = chatBody.scrollHeight;
+
+                // Respuesta automática básica
+                setTimeout(() => {
+                    let respuesta = document.createElement("p");
+                    respuesta.textContent = "ChatBot: En breve lo ayudaremos.";
+                    respuesta.style.color = "blue";
+                    chatBody.appendChild(respuesta);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 1000);
+
+                input.value = "";
+            }
+        }
+    </script>
 
     </body>
 </html>
