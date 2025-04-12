@@ -14,6 +14,17 @@
                 localStorage.setItem('wishlist', JSON.stringify(wishlist));
                 alert(`${producto.nombre} ha sido agregado a tu wishlist!.`);
             }
+                 function agregarAlCarrito(producto) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const existe = carrito.find(p => p.id === producto.id);
+            if (existe) {
+                alert(`${producto.nombre} ya está en el carrito.`);
+                return;
+            }
+            carrito.push(producto);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            alert(`${producto.nombre} ha sido agregado al carrito!`);
+        }
         </script>
     </head>
     <body>
@@ -26,8 +37,9 @@
                     <li><a href="#pulseras">Pulseras</a></li>
                     <li><a href="#anillos">Anillos</a></li>
                     <li><a href="#aretes">Aretes</a></li>
-                    <li><a href="reseñas.html" class="btn-reseñas">Agregar Reseña</a></li> <!-- Opción añadida -->
+                    <li><a href="resenas.html" class="btn-reseñas">Agregar Reseña</a></li> <!-- Opción añadida -->
                     <li><a href="wishlist.html" class="btn-wishlist">Wishlist</a></li>
+                    <li><a href="carrito.html" class="btn-carrito">Carrito</a></li>
                 </ul>
                 <input type="search" placeholder="Buscar...">
             </nav>
@@ -62,40 +74,40 @@
                     <img src="https://i.pinimg.com/736x/3a/e3/c7/3ae3c70fbd78c56802f8bbd63ee65e3c.jpg" width="250" alt="Collar 1">
                     <p>Collar de perlas y piedras naturales</p>
                     <p>₡15,000</p>
-                    <button>Comprar</button>
                     <button onclick="agregarAWishlist({id: 1, nombre: 'Collar de perlas y piedras naturales', precio: '₡15,000', imagen:'https://i.pinimg.com/736x/3a/e3/c7/3ae3c70fbd78c56802f8bbd63ee65e3c.jpg'})">Agregar a Wishlist</button>
+                    <button onclick="agregarAlCarrito({id: 1, nombre: 'Collar de perlas y piedras naturales', precio: '₡15,000', imagen:'https://i.pinimg.com/736x/3a/e3/c7/3ae3c70fbd78c56802f8bbd63ee65e3c.jpg'})">Agregar al Carrito</button>
                 </article>
 
                 <article class="producto" data-categoria="collares" data-material="acero" data-precio="20000">
                     <img src="https://cdnimg.emmiol.com/E/202302/img_original-VDB0521AC-2823530129.jpg" width="250" alt="Collar 2">
                     <p>Collar azul con dije de estrella</p>
                     <p>₡20,000</p>
-                    <button>Comprar</button>
                     <button onclick="agregarAWishlist({id: 2, nombre: 'Collar azul con dije de estrella', precio: '₡20,000', imagen:'https://cdnimg.emmiol.com/E/202302/img_original-VDB0521AC-2823530129.jpg'})">Agregar a Wishlist</button>
+                    <button onclick="agregarAlCarrito({id: 2, nombre: 'Collar azul con dije de estrella', precio: '₡20,000', imagen:'https://cdnimg.emmiol.com/E/202302/img_original-VDB0521AC-2823530129.jpg'})">Agregar al Carrito</button> 
                 </article>
 
                 <article class="producto" data-categoria="anillos" data-material="plata" data-precio="12500">
                     <img src="https://m.media-amazon.com/images/I/51pQ4NXtHoL.jpg" width="250" alt="Anillo 1">
                     <p>Anillo de plata con incrustaciones</p>
                     <p>₡12,500</p>
-                    <button>Comprar</button>
                     <button onclick="agregarAWishlist({id: 3, nombre: 'Anillo de plata con incrustaciones', precio: '₡12,500', imagen:'https://m.media-amazon.com/images/I/51pQ4NXtHoL.jpg'})">Agregar a Wishlist</button>
+                    <button onclick="agregarAlCarrito({id: 3, nombre: 'Anillo de plata con incrustaciones', precio: '₡12,500', imagen:'https://m.media-amazon.com/images/I/51pQ4NXtHoL.jpg'})">Agregar al Carrito</button>
                 </article>
 
                 <article class="producto" data-categoria="pulseras" data-material="oro" data-precio="18000">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe0FRPxqmsIaZwf0SK0wvxIj2VPRFjxU67eQ&s" width="250" alt="Pulsera 1">
                     <p>Pulsera de oro</p>
                     <p>₡18,000</p>
-                    <button>Comprar</button>
                     <button onclick="agregarAWishlist({id: 4, nombre: 'pulsera de oro', precio: '₡18,000', imagen:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe0FRPxqmsIaZwf0SK0wvxIj2VPRFjxU67eQ&s'})">Agregar a Wishlist</button>
+                    <button onclick="agregarAlCarrito({id: 4, nombre: 'Pulsera de oro', precio: '₡18,000', imagen:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe0FRPxqmsIaZwf0SK0wvxIj2VPRFjxU67eQ&s'})">Agregar al Carrito</button>
                 </article>
 
                 <article class="producto" data-categoria="aretes" data-material="oro" data-precio="15000">
                     <img src="https://siman.vtexassets.com/arquivos/ids/6124170-800-800?v=638616837174670000&width=800&height=800&aspect=true" width="250" alt="Aretes">
                     <p>Aretes de oro</p>
                     <p>₡15,000</p>
-                    <button>Comprar</button>
                     <button onclick="agregarAWishlist({id: 5, nombre: 'Aretes de Oro', precio: '₡15,000', imagen:'https://siman.vtexassets.com/arquivos/ids/6124170-800-800?v=638616837174670000&width=800&height=800&aspect=true' })">Agregar a Wishlist</button>
+                    <button onclick="agregarAlCarrito({id: 5, nombre: 'Aretes de Oro', precio: '₡15,000', imagen:'https://siman.vtexassets.com/arquivos/ids/6124170-800-800?v=638616837174670000&width=800&height=800&aspect=true'})">Agregar al Carrito</button>
                 </article>
             </section>
         </main>
